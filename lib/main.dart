@@ -5,38 +5,39 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   runApp(EasyLocalization(
-      supportedLocales: [
-        Locale('en', 'US'),
-        Locale('uz', 'UZ'),
-        Locale('ru', 'RU'),
-        Locale('fr', 'FR')
-      ],
-      path:
-          'assets/translations', // <-- change the path of the translation files
-      fallbackLocale: Locale('en', 'US'),
-      child: MyApp()));
+    supportedLocales: [
+      Locale('en', 'US'),
+      Locale('uz', 'UZ'),
+      Locale('ru', 'RU'),
+      Locale('fr', 'FR'),
+      Locale('kr', 'KR'),
+      Locale('jp', 'JP')
+    ],
+    path: 'assets/translations', // <-- change the path of the translation files
+    fallbackLocale: Locale('en', 'US'),
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(),
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  MyHomePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -51,19 +52,27 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print("welcome".tr());
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Localization"),
-      ),
+      // appBar: AppBar(
+      //   title: Text("Localization"),
+      //   centerTitle: true,
+      // ),
       body: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
-              child: Center(
-                child: Text('welcome').tr(),
+              child: Container(
+                // color: Colors.amber,
+                height: 100,
+                margin: EdgeInsets.all(10),
+                child: Center(
+                  child: Text(
+                    'welcome',
+                    style: TextStyle(fontSize: 20),
+                  ).tr(),
+                ),
               ),
             ),
             SafeArea(
@@ -79,27 +88,42 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                       child: Text("English"),
                     ),
+
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(primary: Colors.red),
                       onPressed: () {
-                        context.locale = Locale("ru", "RU");
+                        context.locale = Locale("kr", "KR");
                       },
-                      child: Text("Russian"),
+                      child: Text("Korean"),
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(primary: Colors.blue),
                       onPressed: () {
-                        context.locale = Locale("uz", "UZ");
+                        context.locale = Locale("jp", "JP");
                       },
-                      child: Text("Uzbek"),
+                      child: Text("Japanese"),
                     ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Colors.amber),
-                      onPressed: () {
-                        context.locale = Locale("fr", "FR");
-                      },
-                      child: Text("French"),
-                    ),
+                    // ElevatedButton(
+                    //   style: ElevatedButton.styleFrom(primary: Colors.red),
+                    //   onPressed: () {
+                    //     context.locale = Locale("ru", "RU");
+                    //   },
+                    //   child: Text("Russian"),
+                    // ),
+                    // ElevatedButton(
+                    //   style: ElevatedButton.styleFrom(primary: Colors.blue),
+                    //   onPressed: () {
+                    //     context.locale = Locale("uz", "UZ");
+                    //   },
+                    //   child: Text("Uzbek"),
+                    // ),
+                    // ElevatedButton(
+                    //   style: ElevatedButton.styleFrom(primary: Colors.amber),
+                    //   onPressed: () {
+                    //     context.locale = Locale("fr", "FR");
+                    //   },
+                    //   child: Text("French"),
+                    // ),
                   ],
                 ),
               ),
